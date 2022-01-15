@@ -1,0 +1,7 @@
+Using the program
+1)Select the photos
+2)Inform the system if you have a pre-existing destination to save to
+	a. A 1 signifies a pre-existing folder see step 3, any other value signifies no pre-existing folder see step 4
+3)If step 2 the input was 1 then select the folder 
+4)If step 2 the input was not 1 then enter a folder name 
+	a.If you enter an existing folder it will save it there

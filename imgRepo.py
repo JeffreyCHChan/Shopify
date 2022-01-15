@@ -28,22 +28,34 @@ def addImg():
 
 
     else:
-        newFolderName = input("Name the new folder:\t") #make a new folder then have the user pick the one that was just created
-        if(os.path.exists(os.getcwd()+f"\\{newFolderName}")==False):
-            os.makedirs(newFolderName)
+        while(True):
+            newFolderName = input(
+                "Name the new folder:\t")  # make a new folder then have the user pick the one that was just created
+            if(os.path.exists(os.getcwd()+f"\\{newFolderName}")==False):
+                os.makedirs(newFolderName)
+                folder = f"{os.getcwd()}\{newFolderName}"
+                print(f"Using folder {folder}")
 
-            print(f"Folder created in '{os.getcwd()}\{newFolderName}' \nSelect Folder would like to use?")#same code as if a folder pre-exists
-            folder = fd.askdirectory()
-            for file in files:
-                lastBackslash = file.rindex("/")
-                target = f"{folder}{file[lastBackslash:]}"
-                shutil.copyfile(file, target) #simulates uploading to a new location
-                copied+=1
-        else:
-            print("File Exists\n Enter 1 ")
-            addImg()
+                for file in files:
+                    lastBackslash = file.rindex("/")
+                    target = f"{folder}{file[lastBackslash:]}"
 
-    print(f"Done uploading {len(files)}")
+                    shutil.copyfile(file, target)
+                    copied += 1
+                break
+            else: #handles a duplicate folder
+                print(f"Using {os.getcwd()}\\{newFolderName}")
+                folder = f"{os.getcwd()}\{newFolderName}"
+                for file in files:
+                    lastBackslash = file.rindex("/")
+                    target = f"{folder}{file[lastBackslash:]}"
+                    shutil.copyfile(file, target) #simulates uploading to a new location
+                    copied+=1
+                break
+            break
+
+
+    print(f"Done uploading {len(files)} files")
     return copied #return value to be used in testing
 
-addImg()
+#addImg()
